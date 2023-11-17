@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { getAccessToken, decodeAccessToken, removeAccessToken } from "../../utils/authUtil";
+import { getAccessToken, decodeAccessToken, removeAccessToken, setRefreshTokenCookie, setAccessTokenCookie } from "@/utils/cookieUtils";
 
 interface AuthState {
     id: number | null,
@@ -21,13 +21,15 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        login: (state, action: PayloadAction<string>) => {
-            const payload: JwtPayload = decodeAccessToken(action.payload);
+        login: (state, action: PayloadAction<{accessToken: string, refreshToken: string}>) => {
+            const payload: JwtPayload = decodeAccessToken(action.payload.accessToken);
             state.isLoggedIn = true
-            state.accessToken = action.payload
-            state.refreshToken = "xxxxxxx"
+            state.accessToken = action.payload.accessToken
+            state.refreshToken = action.payload.refreshToken
             state.user = payload.user
             state.id = payload.sub
+            setRefreshTokenCookie(action.payload.refreshToken);
+            setAccessTokenCookie(action.payload.accessToken);
         },
         logout: (state) => {
             removeAccessToken();
@@ -40,6 +42,8 @@ const authSlice = createSlice({
         refresh: (state, action) => {
             state.accessToken = action.payload.accessToken
             state.refreshToken = action.payload.refreshToken
+            setRefreshTokenCookie(action.payload.refreshToken);
+            setAccessTokenCookie(action.payload.accessToken);
         },
         checkLoggedIn: (state) => {
             const token = getAccessToken();

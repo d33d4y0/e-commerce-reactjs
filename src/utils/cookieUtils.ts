@@ -1,8 +1,12 @@
 import Cookies from "js-cookie";
 import { decodeToken } from "react-jwt";
 
-export const setAccessToken = (value: string) => {
+export const setAccessTokenCookie = (value: string) => {
     Cookies.set("token", value, { expires: 1, secure: true });
+}
+
+export const setRefreshTokenCookie = (value: string) => {
+    Cookies.set("refresh_token", value, { expires: 1, secure: true });
 }
 
 export const getAccessToken = () => {

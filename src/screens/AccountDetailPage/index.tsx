@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
-import { getUserDetail } from "../../apiRequests";
-import NavBar from "../../component/NavBar"
-import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
+import { getUserDetail } from "@/apiRequests";
+import NavBar from "@/component/NavBar"
 
 const AccountDetailPage = () => {
-  const userId = useSelector((state: RootState) => state.auth.id);
   const [userDetail, setUserDetail] = useState<UserDetail>();
-  
+
   useEffect(() => {
     const fetchUserDetail = async () => {
-      if (userId != null) {
-        const resp = await getUserDetail(userId);
-        setUserDetail(resp);
-      }
+      const resp = await getUserDetail();
+      setUserDetail(resp);
     }
-    
+
     fetchUserDetail();
   }, []);
 
@@ -40,8 +35,7 @@ const AccountDetailPage = () => {
                   <div className="w-4 h-4 relative" />
                 </div>
               </div>
-              <div className="text-black text-xl font-semibold font-['Inter'] leading-loose">{`${userDetail?.name.firstname} ${userDetail?.name.lastname}`}</div>
-              {/* <div className="text-black text-xl font-semibold font-['Inter'] leading-loose">{`${userDetail} ${userDetail}`}</div> */}
+              <div className="text-black text-xl font-semibold font-['Inter'] leading-loose">{`${userDetail?.name}`}</div>
             </div>
             <div className="flex-col justify-start items-start gap-3 flex">
               <div className="h-[42px] py-2 border-b border-neutral-900 flex-col justify-start items-start gap-2.5 flex">

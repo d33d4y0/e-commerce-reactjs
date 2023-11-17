@@ -1,5 +1,5 @@
 import { MdOutlinePerson } from "react-icons/md";
-import { RootState } from "../../redux/store";
+import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ const NavBar = () => {
             // TODO show list of link to account page, logout, etc
             navigate("/account");
         } else {
+            navigate("/login");
             //  TODO show list of link to login, register, etc
         }
     }
@@ -26,28 +27,28 @@ const NavBar = () => {
                 <div className="justify-start items-center gap-0.5 flex">
                     <div className="border-neutral-900 justify-start items-center gap-0.5 flex">
                         <div className="justify-start items-center gap-1 flex">
-                            <div className="text-neutral-900 text-sm font-medium font-['Space Grotesk'] leading-normal">Home</div>
+                            <button className="text-neutral-900 text-sm font-medium font-['Space Grotesk'] leading-normal" onClick={() => navigate("/")}>Home</button>
                         </div>
                     </div>
                 </div>
                 <div className="justify-start items-center gap-0.5 flex">
                     <div className="border-zinc-500 justify-start items-center gap-0.5 flex">
                         <div className="justify-start items-center gap-1 flex">
-                            <div className="text-zinc-500 text-sm font-medium font-['Space Grotesk'] leading-normal">Shop</div>
+                            <button className="text-zinc-500 text-sm font-medium font-['Space Grotesk'] leading-normal">Shop</button>
                         </div>
                     </div>
                 </div>
                 <div className="justify-start items-center gap-0.5 flex">
                     <div className="border-zinc-500 justify-start items-center gap-0.5 flex">
                         <div className="justify-start items-center gap-1 flex">
-                            <div className="text-zinc-500 text-sm font-medium font-['Space Grotesk'] leading-normal">Product</div>
+                            <button className="text-zinc-500 text-sm font-medium font-['Space Grotesk'] leading-normal">Product</button>
                         </div>
                     </div>
                 </div>
                 <div className="justify-start items-center gap-0.5 flex">
                     <div className="border-zinc-500 justify-start items-center gap-0.5 flex">
                         <div className="justify-start items-center gap-1 flex">
-                            <div className="text-zinc-500 text-sm font-medium font-['Space Grotesk'] leading-normal">Contact Us</div>
+                            <button className="text-zinc-500 text-sm font-medium font-['Space Grotesk'] leading-normal">Contact Us</button>
                         </div>
                     </div>
                 </div>

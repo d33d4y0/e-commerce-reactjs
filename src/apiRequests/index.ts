@@ -1,31 +1,68 @@
-import axios from "axios";
-import { setAccessToken } from "../utils/authUtil";
 // import { isLoggedIn } from '../redux/slice/authSlice';
-
-const fakestoreBaseUrl = "https://fakestoreapi.com";
+import customAxios from '@/axios';
+import axios from 'axios';
 
 export const loginApi = async (username: string, password: string) => {
     try {
-        // TODO create default axios instance
-        // axios.defaults.withCredentials = true;
-        const response = await axios.post(`${fakestoreBaseUrl}/auth/login`, {
-            // username,
-            // password,
-            username: "mor_2314",
-            password: "83r5^_"
+        const response = await axios.post("/api/v1/auth/login", {
+            email: "john@mail.com",
+            password: "changeme"
         });
-        setAccessToken(response.data["token"]);
         return response;
-    } catch (error: any) {
-        return error.response;
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            throw error.response;
+        }
+        throw error;
     }
 }
 
-export const getUserDetail = async (id: number): Promise<UserDetail> => {
+export const refreshTokenApi = async (refreshToken: string) => {
     try {
-        const response = await axios.get(`${fakestoreBaseUrl}/users/${id}`);
+        const response = await axios.post("/api/v1/auth/refresh-token", {
+            refreshToken: refreshToken
+        });
+        return response;
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            throw error.response;
+        }
+        throw error;
+    }
+}
+
+export const getUserDetail = async (): Promise<UserDetail> => {
+    try {
+        const response = await customAxios.get("/api/v1/auth/profile");
         return response.data as Promise<UserDetail>;
-    } catch (error: any) {
-        return error.response;
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            throw error.response;
+        }
+        throw error;
+    }
+}
+
+export const getProducts = async (): Promise<Product[]> => {
+    try {
+        const response = await customAxios.get("/api/v1/products");
+        return response.data as Promise<Product[]>;
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            throw error.response;
+        }
+        throw error;
+    }
+}
+
+export const getProductDetail = async (id: string): Promise<Product> => {
+    try {
+        const response = await customAxios.get(`/api/v1/products/${id}`);
+        return response.data as Promise<Product>;
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            throw error.response;
+        }
+        throw error;
     }
 }

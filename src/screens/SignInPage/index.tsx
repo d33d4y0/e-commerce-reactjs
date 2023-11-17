@@ -1,10 +1,10 @@
-import { RootState } from "../../redux/store"
+import { RootState } from "@/redux/store"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
-import SignInButton from "../../component/SignInButton";
-import { loginApi } from "../../apiRequests";
-import { login } from "../../redux/slice/authSlice";
+import SignInButton from "@/component/SignInButton";
+import { loginApi } from "@/apiRequests";
+import { login } from "@/redux/slice/authSlice";
 import { AxiosError } from "axios"
 
 type FormErrors = {
@@ -38,9 +38,15 @@ function SignInPage() {
   const handleLogin = async () => {
     try {
       const resp = await loginApi(formData.username, formData.password);
-      if (resp.status == 200) {
-        dispatch(login(resp.data["token"]));
-
+      console.log(resp.status);
+      
+      // check 201 because we use platzi fake store api
+      if (resp.status === 200 || resp.status === 201) {
+        dispatch(login({
+          accessToken: resp.data["access_token"],
+          refreshToken: resp.data["refresh_token"],
+        }));
+        
       } else {
         setShowError(true);
       }
