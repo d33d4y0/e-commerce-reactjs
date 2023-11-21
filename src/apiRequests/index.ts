@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const loginApi = async (username: string, password: string) => {
     try {
-        const response = await axios.post("/api/v1/auth/login", {
+        const response = await customAxios.post("/api/v1/auth/login", {
             email: "john@mail.com",
             password: "changeme"
         });
@@ -19,7 +19,7 @@ export const loginApi = async (username: string, password: string) => {
 
 export const refreshTokenApi = async (refreshToken: string) => {
     try {
-        const response = await axios.post("/api/v1/auth/refresh-token", {
+        const response = await customAxios.post("/api/v1/auth/refresh-token", {
             refreshToken: refreshToken
         });
         return response;

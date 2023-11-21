@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getAccessToken } from "@/utils/cookieUtils";
 
-// const FAKE_STORE_BASE_URL = "https://fakestoreapi.com";
 const PLATZI_FAKE_STORE_BASE_URL = "https://api.escuelajs.co";
 
 const customAxios = axios.create({

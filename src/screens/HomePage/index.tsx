@@ -16,6 +16,7 @@ const HomePage = () => {
     return (
         <>
             <NavBar />
+            <div className="text-center">HomePage</div>
         </>
     )
 }
