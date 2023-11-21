@@ -1,0 +1,7 @@
+.selectedButton {
+  @apply border-b-[1.5px] border-solid border-black font-bold pb-1;
+}
+
+.notSelectedButton {
+  @apply border-b-[1.5px] border-solid border-gray-100 pb-1;
+}

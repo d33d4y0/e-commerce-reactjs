@@ -22,11 +22,12 @@ const NavBar = () => {
     }
   };
 
-  const currentPathCondition = (path: string) => {
+  const currentPathCondition = (path: string): string => {
     return location.pathname === path
       ? "text-sm font-medium text-neutral-900"
       : "text-sm font-medium text-zinc-500";
   };
+  
   return (
     <>
       <div className="container flex  w-full max-w-none items-center justify-between px-40 py-4">
