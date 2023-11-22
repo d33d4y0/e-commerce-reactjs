@@ -27,13 +27,11 @@ const NavBar = () => {
       ? "text-sm font-medium text-neutral-900"
       : "text-sm font-medium text-zinc-500";
   };
-  
+
   return (
     <>
       <div className="container flex  w-full max-w-none items-center justify-between px-40 py-4">
-        <div>
-          <span className="text-2xl font-medium text-black">3legant.</span>
-        </div>
+        <p className="text-2xl font-medium text-black">3legant.</p>
         <div className="flex items-center justify-center gap-20">
           <NavLink to="/" className={currentPathCondition("/")}>
             Home
@@ -56,7 +54,7 @@ const NavBar = () => {
             <MdOutlinePerson />
           </button>
           <button className="text-2xl" onClick={handleOnClickProfile}>
-            <MdOutlineShoppingBag  />
+            <MdOutlineShoppingBag />
           </button>
         </div>
       </div>
