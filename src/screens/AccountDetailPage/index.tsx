@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { getUserDetail } from "@/apiRequests";
 import NavBar from "@/component/NavBar";
 import "./styles.css";
+import Footer from "@/component/Footer";
+import Layout from "@/component/Layout";
 
 const AccountDetailPage = () => {
   const [userDetail, setUserDetail] = useState<UserDetail>();
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
-    console.log(`underlineOnClick ${isClicked ? "clicked" : ""}`);
-
-    setIsClicked((prev) => !prev);
+    setIsClicked(true);
   };
 
   useEffect(() => {
@@ -22,18 +22,11 @@ const AccountDetailPage = () => {
     fetchUserDetail();
   }, []);
 
-  const selectedButtonStyle = (path: string): string => {
-    return location.pathname === path
-      ? "w-full border-b-[1.5px] border-solid border-black pb-1"
-      : "";
-  };
-
   return (
-    <>
-      <NavBar />
+      <Layout>
       <div className="my-20 text-center text-4xl font-semibold">My Account</div>
-      <div className="flex h-[490px] space-x-20 px-40">
-        <div className="flex w-[262px] flex-col bg-gray-100 px-6 py-12">
+      <div className="flex space-x-20 mx-40">
+        <div className="flex w-[262px] h-[490px] flex-col bg-gray-100 px-6 py-12">
           <div className="mb-8 flex flex-col items-center space-y-2">
             <img
               className="h-24 w-24 overflow-hidden rounded-full object-cover"
@@ -176,7 +169,7 @@ const AccountDetailPage = () => {
           </div>
         </div>
       </div>
-    </>
+      </Layout>
   );
 };
 

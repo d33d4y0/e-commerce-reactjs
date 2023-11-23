@@ -1,11 +1,11 @@
+import Layout from "@/component/Layout";
 import NavBar from "@/component/NavBar";
 
 const ContactPage = () => {
   return (
-    <>
-      <NavBar />
+    <Layout>
       <div className="text-center">Contact Us</div>
-    </>
+    </Layout>
   );
 };
 

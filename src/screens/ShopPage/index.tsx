@@ -1,11 +1,11 @@
+import Layout from "@/component/Layout";
 import NavBar from "@/component/NavBar";
 
 const ShopPage = () => {
   return (
-    <>
-      <NavBar />
+    <Layout>
       <div className="text-center">ShopPage</div>
-    </>
+    </Layout>
   );
 };
 
