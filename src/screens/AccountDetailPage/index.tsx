@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { getUserDetail } from "@/apiRequests";
-import NavBar from "@/component/NavBar";
 import "./styles.css";
-import Footer from "@/component/Footer";
 import Layout from "@/component/Layout";
 
 const AccountDetailPage = () => {
   const [userDetail, setUserDetail] = useState<UserDetail>();
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(true);
 
   const handleClick = () => {
     setIsClicked(true);
@@ -25,7 +23,7 @@ const AccountDetailPage = () => {
   return (
       <Layout>
       <div className="my-20 text-center text-4xl font-semibold">My Account</div>
-      <div className="flex space-x-20 mx-40">
+      <div className="flex space-x-20">
         <div className="flex w-[262px] h-[490px] flex-col bg-gray-100 px-6 py-12">
           <div className="mb-8 flex flex-col items-center space-y-2">
             <img
