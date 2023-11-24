@@ -2,14 +2,27 @@ import { useEffect, useState } from "react";
 import { getUserDetail } from "@/apiRequests";
 import "./styles.css";
 import Layout from "@/component/Layout";
+import { logout } from "@/redux/slice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { RootState } from "@/redux/store";
 
 const AccountDetailPage = () => {
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [userDetail, setUserDetail] = useState<UserDetail>();
   const [isClicked, setIsClicked] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setIsClicked(true);
   };
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const fetchUserDetail = async () => {
@@ -50,7 +63,7 @@ const AccountDetailPage = () => {
               <button>Wishlist</button>
             </div>
             <div className="notSelectedButton">
-              <button>Log Out</button>
+              <button onClick={() => dispatch(logout())}>Log Out</button>
             </div>
           </div>
         </div>
