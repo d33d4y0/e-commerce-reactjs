@@ -6,9 +6,12 @@ import {
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
+import { useState } from "react";
+import Cart from "../Cart";
 
 const NavBar = () => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const [isShowCart, setIsShowCart] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,6 +29,10 @@ const NavBar = () => {
     return location.pathname === path
       ? "text-sm font-medium text-neutral-900"
       : "text-sm font-medium text-zinc-500";
+  };
+
+  const showCart = () => {
+    setIsShowCart((prev) => !prev);
   };
 
   return (
@@ -53,10 +60,11 @@ const NavBar = () => {
           <button className="text-2xl" onClick={handleOnClickProfile}>
             <MdOutlinePerson />
           </button>
-          <button className="text-2xl" onClick={handleOnClickProfile}>
+          <button className="text-2xl" onClick={showCart}>
             <MdOutlineShoppingBag />
           </button>
         </div>
+        {isShowCart && <Cart isOpen={isShowCart} onClose={showCart} />}
       </div>
     </>
   );
