@@ -13,11 +13,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, name, price, rating })
     const ratingArray = [1,2,3,4,5];
     return ratingArray.map((ratingItem) => {
       if (ratingItem <= rating) {
-        return <MdOutlineStar className="inline" />;
+        return <MdOutlineStar key={ratingItem} className="inline" />;
       } else if (ratingItem === Math.ceil(rating) && !Number.isInteger(rating)) {
-        return <MdOutlineStarHalf className="inline" />;
+        return <MdOutlineStarHalf key={ratingItem} className="inline" />;
       } else {
-        return <MdOutlineStarOutline className="inline" />;
+        return <MdOutlineStarOutline key={ratingItem} className="inline" />;
       }
     });
   }
