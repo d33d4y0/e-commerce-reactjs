@@ -1,20 +1,40 @@
-const ProductCard = () => {
+import { MdOutlineStarHalf, MdOutlineStarOutline, MdOutlineStar   } from "react-icons/md";
+
+type ProductCardProps = {
+  name: string;
+  price: number;
+  rating: number;
+  image: string;
+};
+
+const ProductCard: React.FC<ProductCardProps> = ({ image, name, price, rating }) => {
+
+  const renderRating = (rating: number) => {
+    const ratingArray = [1,2,3,4,5];
+    return ratingArray.map((ratingItem) => {
+      if (ratingItem <= rating) {
+        return <MdOutlineStar className="inline" />;
+      } else if (ratingItem === Math.ceil(rating) && !Number.isInteger(rating)) {
+        return <MdOutlineStarHalf className="inline" />;
+      } else {
+        return <MdOutlineStarOutline className="inline" />;
+      }
+    });
+  }
+
   return (
-    <div className="overflow-hidden rounded-lg bg-white shadow-md hover:shadow-lg">
-      <div className="h-24 w-full">
+    <div className="flex flex-col">
+      <div className="static">
         <img
-          className="h-full w-full object-cover"
-          src="product-image.jpg"
+          className="h-[349px] w-[262px] object-cover"
+          src={image}
           alt="Product Image"
         />
       </div>
-      <div className="p-4">
-        <h2 className="mb-2 text-lg font-semibold">Product Name</h2>
-        <p className="mb-4 text-sm text-gray-600">Product Description</p>
-        <p className="mb-2 text-lg font-bold">$99.99</p>
-        <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
-          Add to Cart
-        </button>
+      <div className="">
+        {renderRating(rating)}
+        <p className="">{name}</p>
+        <p className="">{`$${price}`}</p>
       </div>
     </div>
   );

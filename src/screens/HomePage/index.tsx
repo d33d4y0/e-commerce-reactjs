@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getProducts } from "@/apiRequests";
 import Layout from "@/component/Layout";
 import Carousel from "@/component/Carousel";
@@ -7,9 +7,10 @@ import { FiArrowRight } from "react-icons/fi";
 import NewArrivalList from "@/component/NewArrivalList";
 
 const HomePage = () => {
+  const [productList, setProductList] = useState<Product[]>([]);
   const fetchProducts = async () => {
     const response = await getProducts();
-    console.log(response);
+    setProductList(response);
   };
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const HomePage = () => {
           <FiArrowRight className="mb-0.5 ml-0.5" />
         </button>
       </div>
-      <NewArrivalList />
+      <NewArrivalList productList={productList} />
     </Layout>
   );
 };
